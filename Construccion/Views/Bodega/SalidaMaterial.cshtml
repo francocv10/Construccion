@@ -1,0 +1,124 @@
+﻿@model IEnumerable<Construccion.Models.SalidaMaterial>
+
+@{
+    ViewData["Title"] = "Registrar Salida de Material";
+    var bodegas = ViewData["Bodegas"] as List<Construccion.Models.Bodega>;
+    var obras = ViewData["Obras"] as List<Construccion.Models.Obra>;
+    var insumos = ViewData["Insumos"] as List<Construccion.Models.Insumos>;
+    var filtro = ViewData["Filtro"] as string;
+}
+
+<h2 class="text-center my-4">Registrar Salida de Material</h2>
+
+<div class="container">
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success text-center">
+            <i class="bi bi-check-circle-fill me-2"></i> @TempData["SuccessMessage"]
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger text-center">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i> @TempData["ErrorMessage"]
+        </div>
+    }
+
+    <div class="d-flex justify-content-center my-3">
+        <form asp-action="SalidaMaterial" method="get" class="d-flex col-md-6 justify-content-center">
+            <input name="filtro" class="form-control me-2" type="text" placeholder="Filtro" value="@filtro" />
+            <button class="btn btn-secondary" type="submit">
+                <i class="bi bi-search"></i> Filtrar
+            </button>
+        </form>
+    </div>
+
+    <form asp-action="SalidaMaterial" method="post" class="mb-5">
+        <div class="mb-4">
+            <label for="idBodega" class="form-label fw-bold">Bodega:</label>
+            <select name="idBodega" id="idBodega" class="form-select">
+                <option selected disabled>Selecciona una bodega</option>
+                @if (bodegas != null)
+                {
+                    @foreach (var bodega in bodegas)
+                    {
+                        <option value="@bodega.IdBodega">@bodega.NombreBodega</option>
+                    }
+                }
+                else
+                {
+                    <option disabled>No hay bodegas disponibles</option>
+                }
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <label for="idObra" class="form-label fw-bold">Obra:</label>
+            <select name="idObra" id="idObra" class="form-select">
+                <option selected disabled>Selecciona una obra</option>
+                @if (obras != null)
+                {
+                    @foreach (var obra in obras)
+                    {
+                        <option value="@obra.IdObra">@obra.NombreObra</option>
+                    }
+                }
+                else
+                {
+                    <option disabled>No hay obras disponibles</option>
+                }
+            </select>
+        </div>
+
+        <div class="mt-4">
+            <label class="form-label fw-bold">Insumos:</label>
+            <table class="table table-striped table-hover text-center align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">Seleccionar</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Bodega</th>
+                        <th scope="col">Cantidad Disponible</th>
+                        <th scope="col">Cantidad a Retirar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (insumos != null && insumos.Count > 0)
+                    {
+                        @foreach (var insumo in insumos)
+                        {
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="selectedInsumos" value="@insumo.IdInsumos" />
+                                </td>
+                                <td>@insumo.Nombre</td>
+                                <td>@insumo.Bodega!.NombreBodega</td>
+                                <td>@insumo.Cantidad</td>
+                                <td>
+                                    <input type="number" name="cantidades" min="1" max="@insumo.Cantidad" class="form-control" />
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr><td colspan="5">No hay insumos disponibles</td></tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-box-arrow-right"></i> Registrar Salida
+            </button>
+            <a class="btn btn-info" asp-controller="Bodega" asp-action="ListaSalidas">
+                <i class="bi bi-list-ul"></i> Lista de Salidas
+            </a>
+            <a class="btn btn-secondary" asp-controller="Bodega" asp-action="Index">
+                <i class="bi bi-arrow-left"></i> Volver a Bodega
+            </a>
+        </div>
+    </form>
+</div>

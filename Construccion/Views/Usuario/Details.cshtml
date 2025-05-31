@@ -1,0 +1,54 @@
+﻿@model Construccion.Models.Usuario
+
+@{
+    ViewData["Title"] = "Detalles Usuario";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center mb-4">@ViewData["Title"]</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h4 class="card-title text-center mb-4">Detalles del Usuario</h4>
+                    <hr />
+                    <dl class="row">
+                        <dt class="col-sm-4">Nombre Completo:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.NombreCompleto)</dd>
+
+                        <dt class="col-sm-4">Identificador:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Identificador)</dd>
+
+                        <dt class="col-sm-4">Rol:</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.IdRolNavigation!.NombreRol)</dd>
+
+                        <dt class="col-sm-4">Contraseña:</dt>
+                        <dd class="col-sm-8">
+                            <input id="passwordDisplay" type="password" class="form-control-plaintext" value="@Model.Clave" readonly />
+                            <div class="form-check mt-2">
+                                <input type="checkbox" class="form-check-input" id="showPasswordCheck">
+                                <label class="form-check-label" for="showPasswordCheck">Mostrar contraseña</label>
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="mt-4 text-center">
+                <a asp-action="Edit" class="btn btn-secondary" asp-route-id="@Model?.IdUsuario">Editar</a>
+                <a class="btn btn-success" asp-action="Index">Volver a la lista</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById('showPasswordCheck').addEventListener('change', function () {
+            var passwordDisplay = document.getElementById('passwordDisplay');
+            passwordDisplay.type = this.checked ? 'text' : 'password';
+        });
+    </script>
+}
+

@@ -1,0 +1,61 @@
+﻿@model Construccion.Models.Usuario
+
+@{
+    ViewData["Title"] = "Editar Usuario";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center mb-4">@ViewData["Title"]</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="IdUsuario" />
+
+                        <div class="form-group">
+                            <label asp-for="NombreCompleto" class="control-label"></label>
+                            <input asp-for="NombreCompleto" class="form-control" />
+                            <span asp-validation-for="NombreCompleto" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Identificador" class="control-label"></label>
+                            <input asp-for="Identificador" class="form-control" />
+                            <span asp-validation-for="Identificador" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Clave" class="control-label"></label>
+                            <input asp-for="Clave" class="form-control" />
+                            <span asp-validation-for="Clave" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="IdRol" class="control-label"></label>
+                            <select asp-for="IdRol" class="form-select" asp-items="ViewBag.IdRol"></select>
+                            <span asp-validation-for="IdRol" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group text-center mt-4">
+                            <button type="submit" value="Guardar" class="btn btn-primary mb-3">Guardar Usuario</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-3">
+        <a class="btn btn-success" asp-action="Index">Volver a la lista</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

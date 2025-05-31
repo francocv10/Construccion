@@ -1,0 +1,56 @@
+﻿@model Construccion.Models.Material
+
+@{
+    ViewData["Title"] = "Agregar Material";
+}
+
+<h2 class="text-center my-4">@ViewData["Title"]</h2>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <form asp-action="AgregarMaterial" method="post" class="needs-validation" novalidate>
+                        <input type="hidden" asp-for="IdPartida" />
+                        <input type="hidden" name="idObra" value="@ViewBag.IdObra" />
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Nombre" class="form-label">Nombre del Material</label>
+                            <input asp-for="Nombre" class="form-control" placeholder="Ingrese el nombre del material" required />
+                            <span asp-validation-for="Nombre" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Cantidad" class="form-label">Cantidad</label>
+                            <input asp-for="Cantidad" type="number" class="form-control" placeholder="Ingrese la cantidad" step="any" required />
+                            <span asp-validation-for="Cantidad" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Precio" class="form-label">Precio</label>
+                            <input asp-for="Precio" type="number" class="form-control" placeholder="Ingrese el precio" step="any" required />
+                            <span asp-validation-for="Precio" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="TipoUnidad" class="form-label">Tipo de Unidad</label>
+                            <input asp-for="TipoUnidad" class="form-control" placeholder="Ingrese el tipo de unidad" required />
+                            <span asp-validation-for="TipoUnidad" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-center mt-4">
+                            <button type="submit" class="btn btn-primary me-2">Guardar Material</button>
+                            <a asp-action="Detalles" asp-route-id="@ViewBag.IdObra" class="btn btn-secondary">Volver a la lista</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

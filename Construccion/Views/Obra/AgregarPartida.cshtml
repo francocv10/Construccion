@@ -1,0 +1,47 @@
+﻿@model Construccion.Models.Partida
+
+@{
+    ViewData["Title"] = "Agregar Partida";
+}
+
+<h1 class="text-center my-4">@ViewData["Title"]</h1>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <form asp-action="AgregarPartida" method="post" class="needs-validation" novalidate>
+                        <input type="hidden" name="obraId" value="@Model.IdObra" />
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Nombre" class="form-label">Nombre de la Partida</label>
+                            <input asp-for="Nombre" class="form-control" placeholder="Ingrese el nombre de la partida" required />
+                            <span asp-validation-for="Nombre" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="ManoDeObra" class="form-label">Costo de la Mano de Obra</label>
+                            <input asp-for="ManoDeObra" class="form-control" placeholder="Ingrese el costo de la mano de obra" required />
+                            <span asp-validation-for="ManoDeObra" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-center mt-4">
+                            <button type="submit" class="btn btn-primary me-2">Agregar Partida</button>
+                            <a asp-action="Detalles" asp-route-id="@Model.IdObra" class="btn btn-secondary">Volver a la lista</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+
+
+

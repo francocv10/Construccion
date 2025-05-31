@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Construccion.Models.Rol>
+
+@{
+    ViewData["Title"] = "Gestor rol";
+}
+
+<h1>Gestor Rol</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Crear</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreRol)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreRol)
+            </td>
+            <td>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.IdRol"><i class="fa-solid fa-user-slash">Eliminar</i></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

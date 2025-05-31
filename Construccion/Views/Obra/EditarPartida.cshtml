@@ -1,0 +1,69 @@
+﻿@model Partida
+
+@{
+    ViewData["Title"] = "Editar Partida";
+}
+
+<h2 class="text-center my-4">Editar Partida: <strong>@Model.Nombre</strong></h2>
+
+<form asp-action="EditarPartida" method="post" class="mt-4">
+    <input type="hidden" asp-for="IdPartida" />
+    <input type="hidden" asp-for="IdObra" />
+
+    <div class="mb-3">
+        <label asp-for="Nombre" class="form-label"><strong>Nombre de la Partida</strong></label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ManoDeObra" class="form-label"><strong>Mano de Obra</strong></label>
+        <input asp-for="ManoDeObra" class="form-control" />
+        <span asp-validation-for="ManoDeObra" class="text-danger"></span>
+    </div>
+
+    <h3 class="text-center my-4">Materiales</h3>
+
+    <table class="table table-striped table-hover text-center align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>Nombre</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Tipo de Unidad</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Materiales.Count; i++)
+            {
+                <tr>
+                    <td>
+                        <input asp-for="@Model.Materiales[i].Nombre" class="form-control" placeholder="Nombre del material" />
+                        <input type="hidden" asp-for="@Model.Materiales[i].Id" />
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Materiales[i].Cantidad" class="form-control" placeholder="Cantidad" />
+                        <span asp-validation-for="@Model.Materiales[i].Cantidad" class="text-danger"></span>
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Materiales[i].Precio" class="form-control" placeholder="Precio" />
+                        <span asp-validation-for="@Model.Materiales[i].Precio" class="text-danger"></span>
+                    </td>
+                    <td>
+                        <input asp-for="@Model.Materiales[i].TipoUnidad" class="form-control" placeholder="Tipo de Unidad" />
+                        <span asp-validation-for="@Model.Materiales[i].TipoUnidad" class="text-danger"></span>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-center gap-3 mt-4">
+        <button type="submit" class="btn btn-primary">
+            <i class="bi bi-save"></i> Guardar Cambios
+        </button>
+        <a asp-action="Detalles" asp-route-id="@Model.IdObra" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Volver a la lista
+        </a>
+    </div>
+</form>

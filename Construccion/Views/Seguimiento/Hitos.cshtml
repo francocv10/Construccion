@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Construccion.Models.Hito>
+
+@{
+    ViewData["Title"] = "Hitos de la Obra";
+}
+
+<h2 class="text-center my-4">Hitos de la Obra - <strong>@ViewBag.NombreObra</strong></h2>
+
+<h3 class="text-center">Nombre Cliente: <strong>@ViewBag.Cliente</strong></h3>
+<p class="text-center">Porcentaje de avance: <strong>@ViewBag.PorcentajeAvance %</strong></p>
+
+<form asp-action="GuardarAvance" method="post">
+    <input type="hidden" name="idObra" value="@ViewBag.IdObra" />
+
+    <table class="table table-striped table-hover text-center align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>Nombre del Hito</th>
+                <th>Partida</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var hito in Model)
+            {
+                <tr>
+                    <td>@hito.NombreHito</td>
+                    <td>@hito.Partida?.Nombre</td>
+                    <td>
+                        <div class="form-check d-flex justify-content-center align-items-center">
+                            <input type="checkbox" class="form-check-input" name="hitosFinalizados" value="@hito.IdHito" @(hito.Finalizado ? "checked" : "") />
+                            <label class="form-check-label ms-2">Finalizado</label>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">
+            <i class="bi bi-save"></i> Guardar Avance
+        </button>
+    </div>
+</form>
+
+<div class="d-flex justify-content-center align-items-center mt-4 gap-3">
+    <a asp-action="CrearHito" asp-route-idObra="@ViewBag.IdObra" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i> Crear Hito
+    </a>
+    <a asp-action="SeleccionarHito" asp-route-idObra="@ViewBag.IdObra" class="btn btn-danger">
+        <i class="bi bi-check-circle"></i> Seleccionar Hito
+    </a>
+    <a asp-controller="Obra" asp-action="Detalles" asp-route-id="@ViewBag.IdObra" class="btn btn-info">
+        <i class="bi bi-info-circle"></i> Detalles de la Obra
+    </a>
+    <a asp-action="SeleccionarObra" class="btn btn-secondary">
+        <i class="bi bi-arrow-left"></i> Volver a la Lista
+    </a>
+</div>
+

@@ -1,0 +1,44 @@
+﻿@model Construccion.Models.Obra
+
+@{
+    ViewBag.Title = "Crear Nueva Obra";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">@ViewBag.Title</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <form asp-action="Crear" method="post" class="p-4">
+                        <div class="mb-3">
+                            <label for="NombreObra" class="form-label">Nombre de la Obra</label>
+                            <input type="text" asp-for="NombreObra" class="form-control" placeholder="Ingresa el nombre de la obra" />
+                            <span asp-validation-for="NombreObra" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Cliente" class="form-label">Cliente</label>
+                            <input type="text" asp-for="Cliente" class="form-control" placeholder="Ingresa el nombre del cliente" />
+                            <span asp-validation-for="Cliente" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-center mt-4">
+                            <button type="submit" class="btn btn-primary me-2">Crear Obra</button>
+                            <a class="btn btn-success" asp-action="Index">Volver a la lista</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+

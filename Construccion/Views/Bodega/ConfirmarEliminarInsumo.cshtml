@@ -1,0 +1,22 @@
+﻿@model Construccion.Models.Insumos
+
+@{
+    ViewData["Title"] = "Eliminar Insumo";
+}
+
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="card shadow-sm" style="width: 24rem;">
+        <div class="card-body text-center">
+            <h4 class="card-title">Confirmar eliminación</h4>
+            <p>¿Está seguro de que desea eliminar el insumo <strong>@Model.Nombre</strong>? Esta acción eliminará el insumos en la bodega correspondiente que se ha ingresado.</p>
+
+            <form asp-action="EliminarInsumo" method="post">
+                <input type="hidden" name="idBodega" value="@ViewBag.IdBodega" />
+                <input type="hidden" name="idInsumo" value="@Model.IdInsumos" />
+                <button type="submit" class="btn btn-danger me-2">Eliminar Insumo</button>
+                <a asp-action="ListaInsumos" asp-route-idBodega="@ViewBag.IdBodega" class="btn btn-secondary">Volver a la lista</a>
+            </form>
+        </div>
+    </div>
+</div>
+

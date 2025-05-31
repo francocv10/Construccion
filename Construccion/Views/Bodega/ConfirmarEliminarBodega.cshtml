@@ -1,0 +1,27 @@
+﻿@model Construccion.Models.Bodega
+
+@{
+    ViewData["Title"] = "Eliminar Bodega";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Eliminar Bodega</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <p class="text-center">¿Está seguro de que desea eliminar la bodega <strong>@Model.NombreBodega</strong>? Esta acción eliminará los insumos ingresados y las salidas que se han registrado.</p>
+
+                    <form asp-action="EliminarBodega" method="post">
+                        <input type="hidden" name="id" value="@Model.IdBodega" />
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-danger">Eliminar Bodega</button>
+                            <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

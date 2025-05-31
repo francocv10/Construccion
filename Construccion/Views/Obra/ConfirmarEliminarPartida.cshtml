@@ -1,0 +1,29 @@
+﻿@model Construccion.Models.Partida
+
+@{
+    ViewData["Title"] = "Eliminar partida";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">@ViewData["Title"]</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <p class="text-center">¿Estás seguro que deseas eliminar la partida <strong>@Model.Nombre</strong>? Esta acción eliminará la partida que se encuentra en detalles de la obra
+                                            y disminuirá el valor total de presupuesto.</p>
+
+                    <form asp-action="EliminarPartida" method="post">
+                        <input type="hidden" name="idPartida" value="@Model.IdPartida" />
+                        <input type="hidden" name="idObra" value="@Model.IdObra" />
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-danger">Eliminar Partida</button>
+                            <a asp-action="Detalles" class="btn btn-secondary" asp-controller="Obra" asp-route-id="@ViewBag.IdObra">Volver a la partida</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

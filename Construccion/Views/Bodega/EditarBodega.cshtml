@@ -1,0 +1,47 @@
+﻿@model Construccion.Models.Bodega
+
+@{
+    ViewData["Title"] = "Editar Bodega";
+}
+
+<div class="container d-flex justify-content-center align-items-center" style="height: 50vh;">
+    <div class="card shadow" style="width: 50%; max-width: 500px;">
+        <div class="card-body">
+            <h2 class="card-title text-center">@ViewData["Title"]</h2>
+            <form asp-action="@ViewBag.Action" id="bodegaForm" method="post" novalidate>
+                <div class="form-group">
+                    <label for="NombreBodega">Nombre de la Bodega</label>
+                    <input asp-for="NombreBodega" class="form-control" />
+                    <span asp-validation-for="NombreBodega" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="submit" class="btn btn-primary">Guardar Bodega</button>
+                    <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
+    <script>
+        document.getElementById("bodegaForm").addEventListener("submit", function (event) {
+            const nombreBodegaInput = document.querySelector("[name='NombreBodega']");
+            const errorSpan = document.querySelector("[data-valmsg-for='NombreBodega']");
+
+            if (!nombreBodegaInput.value.trim()) {
+                
+                errorSpan.textContent = "El nombre de la bodega es obligatorio.";
+                errorSpan.classList.add("text-danger");
+                event.preventDefault(); 
+            } else {
+                
+                errorSpan.textContent = "";
+            }
+        });
+    </script>
+}
+

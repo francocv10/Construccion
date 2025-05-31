@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Bienvenido";
+}
+
+<div class="text-center my-5">
+    
+    <img src="~/images/user-profile.png" alt="Usuario" class="mb-4" style="max-width: 150px;" />
+
+    @if (User.Identity!.IsAuthenticated)
+    {
+     
+        <h1 class="display-4 font-weight-bold">¡Bienvenido, @User.Identity.Name!</h1>
+
+    }
+</div>
+

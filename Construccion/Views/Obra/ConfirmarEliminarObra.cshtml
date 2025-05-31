@@ -1,0 +1,29 @@
+﻿@model Obra
+
+@{
+    ViewData["Title"] = "Eliminar";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">@ViewData["Title"]</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <p>¿Está seguro de que desea eliminar la obra: <strong>@Model.NombreObra</strong>? Esta acción eliminará la obra y las partidas relacionadas
+                        que se han ingresado, y también sera eliminado en seguimiento.</p>
+
+                    <form asp-action="EliminarObra" method="post">
+                        <input type="hidden" name="id" value="@Model.IdObra" />
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-danger">Eliminar Obra</button>
+                            <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

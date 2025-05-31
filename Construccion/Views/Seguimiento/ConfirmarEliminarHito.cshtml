@@ -1,0 +1,26 @@
+﻿@model Construccion.Models.Hito
+
+@{
+    ViewData["Title"] = "Confirmar Eliminación";
+}
+
+<div class="container d-flex justify-content-center align-items-center" style="height: 50vh;">
+    <div class="card shadow" style="width: 50%; max-width: 500px;">
+        <div class="card-body text-center">
+            <h4 class="card-title">Eliminar Hito</h4>
+            <p>
+                ¿Está seguro de que desea eliminar el hito
+                "<strong>@Model.NombreHito</strong>"? Esta acción eliminará el hito en
+                la obra correspondiente y disminuirá el porcentaje de avance.
+            </p>
+            <hr />
+            <form asp-action="EliminarHito" method="post">
+                <input type="hidden" name="idHito" value="@Model.IdHito" />
+                <input type="hidden" name="idObra" value="@ViewBag.IdObra" />
+                <button type="submit" class="btn btn-danger">Eliminar Hito</button>
+                <a asp-action="Hitos" asp-route-idObra="@ViewBag.IdObra" class="btn btn-secondary">Volver a la lista</a>
+            </form>
+        </div>
+    </div>
+</div>
+

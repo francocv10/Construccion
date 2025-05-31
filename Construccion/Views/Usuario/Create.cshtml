@@ -1,0 +1,69 @@
+﻿@model Construccion.Models.Usuario
+
+@{
+    ViewData["Title"] = "Crear Usuario";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center mb-4">@ViewData["Title"]</h1>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <form asp-action="Create" class="needs-validation" novalidate>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="NombreCompleto" class="form-label"></label>
+                            <input asp-for="NombreCompleto" class="form-control" required />
+                            <span asp-validation-for="NombreCompleto" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Identificador" class="form-label"></label>
+                            <input asp-for="Identificador" class="form-control" required />
+                            <span asp-validation-for="Identificador" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Clave" class="form-label"></label>
+                            <input asp-for="Clave" class="form-control" type="password" id="passwordField" required />
+                            <span asp-validation-for="Clave" class="text-danger"></span>
+
+                            <div class="form-check mt-2">
+                                <input type="checkbox" class="form-check-input" id="togglePassword" onclick="togglePasswordVisibility()">
+                                <label class="form-check-label" for="togglePassword">Mostrar Contraseña</label>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="IdRol" class="form-label"></label>
+                            <select asp-for="IdRol" class="form-select" asp-items="ViewBag.IdRol" required></select>
+                        </div>
+
+                        <div class="d-flex justify-content-center mt-4">
+                            <button type="submit" value="Crear" class="btn btn-primary me-2">Crear Usuario</button>
+                            <a class="btn btn-success" asp-action="Index">Volver a la lista</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        function togglePasswordVisibility() {
+            var passwordField = document.getElementById("passwordField");
+            var toggleCheckbox = document.getElementById("togglePassword");
+            passwordField.type = toggleCheckbox.checked ? "text" : "password";
+        }
+    </script>
+}
+
